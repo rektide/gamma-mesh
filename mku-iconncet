@@ -1,0 +1,2 @@
+#!/bin/sh
+(cd u-boot; make iconnect_config; make)

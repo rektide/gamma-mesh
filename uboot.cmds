@@ -1,0 +1,97 @@
+dhcp
+setenv "serverip" "10.50.50.13"
+tftpboot 0x01100000 di-kirk/uInitrd
+tftpboot 0x00800000 di-kirk/uImage
+setenv bootargs console=ttyS0,115200n8 base-installer/initramfs-tools/driver-policy=most
+bootm 0x00800000 0x01100000
+
+usb start
+ext2load usb 0:2 0x01100000 /uInitrd
+ext2load usb 0:2 0x00800000 /uImage
+setenv bootargs console=ttyS0,115200n8 base-installer/initramfs-tools/driver-policy=most
+bootm 0x00800000 0x01100000
+
+ext2load usb 0:1 0x00800000 /uImage
+
+
+usb start
+setenv bootargs console=ttyS0,115200 $(mtdparts) root=/dev/sda2 rootdelay=6 single
+ext2load usb 0:1 0x00800000 /sheeva-3.0.4-uImage
+bootm 0x00800000
+
+0x000000000000-0x000000100000 : "u-boot"
+0x000000100000-0x000000300000 : "uImage"
+0x000000300000-0x000020000000 : "root"
+
+ #: name                        size            offset          mask_flags
+ 0: uboot               0x000c0000      0x00000000      0
+ 1: env                 0x00020000      0x000a0000      0
+ 2: zImage              0x00200000      0x00100000      0
+ 3: initrd              0x00500000      0x00300000      0
+ 4: boot                0x1f800000      0x00800000      0
+
+
+
+setenv bootargs_console 'console=ttyS0,115200 root=/dev/sda2 rootdelay=6'
+setenv bootcmd_usb 'usb start; ext2load usb 0:1 0x00800000 /uImage'
+setenv bootcmd 'setenv bootargs $(bootargs_console); run bootcmd_usb;bootm 0x00800000'
+
+i
+
+setenv bootargs_console 'console=ttyS0,115200 root=/dev/sda2 rootdelay=6'
+setenv bootcmd_usb 'usb start; ext2load usb 0:1 0x00800000 /uImage'
+setenv bootcmd '
+
+
+
+
+Marvell>> printenv bootcmd
+bootcmd=run flash_load
+Marvell>> printenv flash_load
+flash_load=run make_boot_args load1 load2 boot
+Marvell>> printenv make_boot_args
+make_boot_args=setenv bootargs console=ttyS0,115200 mtdparts=nand_mtd:;setenv bootargs $(bootargs)$(uboot_size)@$(uboot_start)(uboot),;setenv bootargs $(bootargs)$(env_size)@$(env_start)(env),;setenv bootargs $(bootargs)$(kernel_size)@$(kernel_start)(zImage),;setenv bootargs $(bootargs)$(initrd_size)@$(initrd_start)(initrd),;setenv bootargs $(bootargs)128m@0x0(flash);
+Marvell>> printenv load1
+load1=nand read.e 0x2000000 $(kernel_start) $(kernel_size)
+Marvell>> printenv load2
+Unknown command 'printenv' - try 'help'
+Marvell>> printenv load2
+load2=nand read.e 0x4500000 $(initrd_start) $(initrd_size)
+
+nand read.e 0x00500000 initrd
+
+
+0x00500000
+0x00300000
+0x00800000
+
+0x2000000
+0x100000
+0x300000
+
+
+nand read.e 0x00800000 initrd
+setenv bootargs console=ttyS0,115200 $(mtdparts) ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs'
+bootm 0x00800000 
+
+
+
+setenv bootcmd_nand 'nand read.e 0x2000000 0x100000 0x300000'
+setenv bootcmd 'run bootcmd_nand; bootm'
+setenv bootargs 'console=ttyS0,115200 mtdparts=orion_nand:0xc0000@0x0(uboot),0x20000@0xa0000(env),0x300000@0x100000(zImage),0x300000@0x540000(initrd),0x1f400000@0x980000(boot) ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs'
+
+
+
+
+mtdparts=orion_nand:0xc0000@0x0(uboot),0x20000@0xa0000(env),0x300000@0x100000(zImage),0x300000@0x540000(initrd),0x1f400000@0x980000(boot)
+
+mtdparts=nand:0xc0000@0x0(uboot),0x20000@0xa0000(env),0x200000@0x100000(zImage),5m(initrd),-(boot)
+
+setenv mtdids 'nand0=orion_nand'
+setenv mtdparts 'mtdparts=orion_nand:0xc0000@0x0(uboot),0x20000@0xa0000(env),0x200000@0x100000(zImage),5m(initrd),-(boot)'
+
+
+
+mtdparts=orion_nand:0xc0000@0x0(uboot),0x20000@0xa0000(env),0x300000@0x100000(zImage),0x300000@0x540000(initrd),0x1f400000@0x980000(boot)
+
+saveenv

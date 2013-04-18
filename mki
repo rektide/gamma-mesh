@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/bin/mkimage -A arm -O linux -T kernel  -C none -a 0x00008000 -e 0x00008000 -n linux -d zImage uImage
