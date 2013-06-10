@@ -4,3 +4,9 @@
 * mk.fdt to copy in dist/boot/fdt from linux/arch/arm/boot/dts/kirkwood*
 * mk.ubifs
 * mk.ubi
+Serve
+
+* nand erase.part rootfs
+* tftpboot 0x800000 ubifs.img
+[read x bytes]
+* nand write 0x800000 0xa000 [hex size]
