@@ -1,0 +1,6 @@
+* compile a Kirkwood linux/
+* extract a pdebuild into dist/
+* mk.uimage to build a uImage from linux/
+* mk.fdt to copy in dist/boot/fdt from linux/arch/arm/boot/dts/kirkwood*
+* mk.ubifs
+* mk.ubi
