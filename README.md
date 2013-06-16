@@ -1,14 +1,16 @@
 # U-Boot
-* mk.uboot to compile (edit BOARD and CROSS_COMPILE vars)
+* mk.uboot to compile (edit `BOARD` and `CROSS_COMPILE` vars)
 
 # Image
 * compile a Kirkwood linux/
 * mk.pde to extract a pdebuild into dist/
 * mk.uimage to build a uImage from linux/
-* mk.fdt to copy in dist/boot/fdt from linux/arch/arm/boot/dts/kirkwood*
+* mk.fdt to copy in dist/boot/fdt from linux/arch/arm/boot/dts/kirkwood
 * mk.ubifs
 * mk.ubi
-Serve
+* Copy final ubi.img to tftp server.
+
+# Serve
 
 * nand erase.part rootfs
 * tftpboot 0x800000 ubi.img
