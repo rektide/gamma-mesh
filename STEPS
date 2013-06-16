@@ -1,3 +1,7 @@
+# U-Boot
+* mk.uboot to compile (edit BOARD and CROSS_COMPILE vars)
+
+# Image
 * compile a Kirkwood linux/
 * mk.pde to extract a pdebuild into dist/
 * mk.uimage to build a uImage from linux/

@@ -2,6 +2,5 @@
 
 BOARD=kirkwood-iconnect
 
-mkdir dist/boot/fdt
-cp -aurv linux/arch/arm/boot/dts/{kirk,skeleton}* dist/boot/fdt
-dtc dist/boot/fdt/${BOARD}.dts -O dtb -o dist/boot/${BOARD}.dtc
+dtc -O dtb -o ${BOARD}.dtb linux/arch/arm/boot/dts/${BOARD}.dts
+cp ${BOARD}.dtb dist/boot/
