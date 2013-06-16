@@ -1,0 +1,5 @@
+#!/bin/sh
+BOARD=kirkwood-iconnect
+mkimage -f kernel_fdt.its ${BOARD}.itb
+#mkimage -l ${BOARD}.itb
+cp ${BOARD}.itb dist/boot/

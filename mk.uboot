@@ -1,0 +1,15 @@
+#!/bin/bash -x
+
+BOARD=iconnect
+UBOOT_DIR=u-boot
+export CROSS_COMPILE=arm-none-eabi-
+
+pushd .
+cd ${UBOOT_DIR} || exit
+#make distclean
+make ${BOARD}_config
+make
+make u-boot.kwb
+
+popd
+cp ${UBOOT_DIR}/u-boot.kwb ${BOARD}.kwb
