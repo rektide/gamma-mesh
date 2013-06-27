@@ -1,3 +1,2 @@
 #!/bin/sh
-(cd linux; DEB_HOST_ARCH=armel time make-kpkg --revision=1.004 --arch=arm --subarch=armel --rootcmd=fakeroot --cross-compile=arm-linux-gnueabi- kernel_image kernel_headers)
-
+(cd linux; DEB_HOST_ARCH=armel time make-kpkg --revision=1.005 --arch=arm --subarch=armel --rootcmd=fakeroot --cross-compile=arm-linux-gnueabi- -j4 kernel_image kernel_headers)
