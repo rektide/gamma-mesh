@@ -2,7 +2,7 @@
 
 BOARD=kirkwood-iconnect
 #DTS=linux/arch/arm/boot/dts/${BOARD}.dts
-DTS=${BOARD}.dts
 
+cp ${BOARD}.dts linux/arch/arm/boot/dts/${BOARD}.dts
 dtc -O dtb -o ${BOARD}.dtb linux/arch/arm/boot/dts/${BOARD}.dts
 cp ${BOARD}.dtb dist/boot/
