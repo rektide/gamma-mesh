@@ -13,7 +13,7 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,115200n8 earlyprintk";
+		bootargs = "console=ttyS0,115200n8 verbose systemd.log_level=debug systemdlog_target=kmsg init=/lib/systemd/systemd noinitrd ubi.mtd=root root=ubi0:root rootfstype=ubifs";
 	};
 
 	ocp@f1000000 {
@@ -93,7 +93,7 @@
 			};
 
 			partition@a0000 {
-				label = "image";
+				label = "root";
 				reg = <0xa0000 0x1ff60000>;
 			};
 		};
