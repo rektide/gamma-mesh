@@ -17,6 +17,7 @@ nand write 0 iconnect.kwb 0 oob_softecc_kw
 # Make board image
 * compile a Kirkwood linux/
 * mk.pde to extract a pdebuild into dist/
+* mk.pde.configure to perform configuration of image (set temporary root password here)
 * mk.uimage to build a uImage from linux/
 * mk.fdt to copy in dist/boot/fdt from linux/arch/arm/boot/dts/kirkwood
 * mk.ubifs
