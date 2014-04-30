@@ -2,6 +2,9 @@
 * mk.uboot to compile (edit `BOARD` and `CROSS_COMPILE` vars)
 
 # OpenOCD Flash U-Boot
+
+Via Mix of Hard And Soft[[1](http://hardsoftmix.blogspot.com/2011/07/jtag-on-iconnect.html)][[2](http://hardsoftmix.blogspot.com/2012/03/patch-u-boot-for-iconnect.html)].
+
 * openocd -f openocd_iconnect.cfg and allow to remain running
 * telnet localhost 4444 and run:
 ```
