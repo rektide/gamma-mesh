@@ -4,6 +4,7 @@
 # OpenOCD Flash U-Boot
 * openocd -f openocd_iconnect.cfg and allow to remain running
 * telnet localhost 4444 and run:
+```
 init
 init2
 init4
@@ -13,6 +14,7 @@ nand list
 nand erase 0 0x0 0xc0000
 nand info 0 0 10
 nand write 0 iconnect.kwb 0 oob_softecc_kw
+```
 
 # Make board image
 * compile a Kirkwood linux/
@@ -25,7 +27,6 @@ nand write 0 iconnect.kwb 0 oob_softecc_kw
 * Copy final ubi.img to tftp server.
 
 # Flash
-
 * nand erase.part root
 * tftpboot ${fileaddr} ubi.img
 * wait for finish, reports hex byte size:
@@ -33,22 +34,26 @@ nand write 0 iconnect.kwb 0 oob_softecc_kw
 * nand write ${fileaddr} 0xa0000 [hex size, above, ad00000]
 
 # Boot
-
+```
 ubi part root
 ubifsmount ubi0
 ubifsload ${fileaddr} /boot/kirkwood-iconnect.its
 bootm
+```
 
 or
 
+```
 ubi part root;
 ubifsmount ubi0;
 ubifsload ${fileaddr} /boot/uImage;
 ubifsload ${fdt_addr_r} /boot/kirkwood-iconnect.dtb;
 bootm ${fileaddr} - ${fdt_addr_r} 
+```
 
 # Bootargs
 
+```
 setenv fdr_addr_r=0x1100000
 setenv fdt_file=/boot/kirkwood-iconnect.dtb
 setenv kernel=/boot/uImage
@@ -61,10 +66,13 @@ setenv boot_root 'ubi part root; ubifsmount ubi0;'
 setenv boot_load 'ubifsload ${fileaddr} ${kernel}; ubifsload ${fdr_addr_r} ${fdt_file};'
 setenv boot_run 'bootm ${fileaddr} - ${fdr_addr_r};'
 setenv bootcmd 'run go_bootargs; run boot_root; run boot_load; run boot_run;'
+```
 
 # Misc
 
+```
 fdt addr ${fdt_addr_r}; fdt list /; fdt list /ocp@f1000000/nand@3000000/partition@a0000
+```
 
 # Bad FITS
 
